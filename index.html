@@ -1,13 +1,10 @@
 <html>
-<body>
+<body style="text-align: center; font-family:helvetica;">
 
 <script type="text/javascript">
 
 /*
-* World Populution Counter - By JavaScript Kit (http://www.javascriptkit.com)
-* Based on code by Adam Brown
-* This notice MUST stay intact for use
-* Visit JavaScript Kit (http://www.javascriptkit.com) for this script and more
+* Derived from World Populution Counter - based on JavaScript Kit (http://www.javascriptkit.com) and code by Adam Brown
 */
 
 function maind(){
@@ -34,22 +31,36 @@ function ChangeValue(number,pv){
 
 	 numberstring=numberstring
 
-if (pv==1) {document.getElementById("worldpop").innerHTML=numberstring }
+if (pv==1) {document.getElementById("mobilepop").innerHTML=numberstring }
 }
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
 
 
 function now(year,month,date,hours,minutes,seconds){       
 startdatum = new Date(year,month,date,hours,minutes,seconds)
 
-var now = 5600000000.0
-var now2 = 5690000000.0
-var groeipercentage = (now2 - now) / now *100
-var groeiperseconde = (now * (groeipercentage/100))/365.0/24.0/60.0/60.0 
+var tot2011 = getUrlVars()["tot2011"];
+var growthpersecond = getUrlVars()["gps"];
+var title = getUrlVars()["title"];
+
+document.getElementById("title").innerHTML=title;
+
+
+/*var tot2011 = 5400000000.0
+var growthpersecond = 19.03*/
+
 nu = new Date ()                
-schuldstartdatum = new Date (96,1,1)                            
-secondenoppagina = (nu.getTime() - startdatum.getTime())/1000
-totaleschuld= (nu.getTime() - schuldstartdatum.getTime())/1000*groeiperseconde + now
-ChangeValue(totaleschuld,1);
+startdatum2011 = new Date (2011,1,1)                            
+totalnow= (nu.getTime() - startdatum2011.getTime())/1000.0*growthpersecond + parseFloat(tot2011)
+ChangeValue(totalnow,1);
 
 
 timerID = setTimeout("now(startdatum.getYear(),startdatum.getMonth(),startdatum.getDate(),startdatum.getHours(),startdatum.getMinutes(),startdatum.getSeconds())",200)
@@ -62,10 +73,14 @@ window.onload=maind
 <br />
 <br />
 <br />
+<br />
+Estimated number of <span id="title"></span>
+<br />
 
-<div id="worldpop" style="text-align: center;font-weight: bold;font-size: 72; font-family:helvetica;"></div>.
+<div id="mobilepop" style="font-weight: bold;font-size: 128;"></div>
 
 <br />
+
 
 
 </body>
