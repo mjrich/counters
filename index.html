@@ -51,7 +51,7 @@ var tot2011 = getUrlVars()["tot2011"];
 var growthpersecond = getUrlVars()["gps"];
 var title = getUrlVars()["title"];
 
-document.getElementById("title").innerHTML=title;
+document.getElementById("title").innerHTML=decodeURI(title);
 
 
 /*var tot2011 = 5400000000.0
